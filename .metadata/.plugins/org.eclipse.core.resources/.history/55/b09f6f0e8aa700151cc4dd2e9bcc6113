@@ -1,0 +1,11 @@
+package StringBuffer;
+
+public class StringBufferImpl extends AbstractStringBuilder{
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

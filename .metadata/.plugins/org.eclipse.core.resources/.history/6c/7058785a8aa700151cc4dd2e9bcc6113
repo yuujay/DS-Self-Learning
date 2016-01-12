@@ -1,0 +1,6 @@
+package StringBuffer;
+
+public class StringBufferImpl{
+	public StringBufferImpl() {
+	}
+}

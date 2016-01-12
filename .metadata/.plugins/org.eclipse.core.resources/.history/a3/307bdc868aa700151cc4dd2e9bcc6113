@@ -1,0 +1,12 @@
+package StringBuffer;
+
+public class StringBufferImpl{
+	
+	char[] value;
+	int count;
+	
+	public StringBufferImpl(int capacity){
+		value = new char[capacity];
+	}
+	
+}
