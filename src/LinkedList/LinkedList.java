@@ -5,9 +5,9 @@ package LinkedList;
  * */
 
 public class LinkedList<T> {
-	Node <T> head;
-	Node <T> tail;
-	int length;
+	private Node <T> head;
+	private Node <T> tail;
+	private int length;
 
 	public Node <T> getHead(){
 		return head;
@@ -21,6 +21,11 @@ public class LinkedList<T> {
 		return length;
 	}
 	
+	LinkedList(){
+		length = 0;
+		head = null;
+		tail = null;
+	}
 	public void addAtFirst(Node <T> newNode){
 		newNode.setNext(head);
 		head = newNode;
@@ -32,10 +37,11 @@ public class LinkedList<T> {
 		if(head == null)
 			addAtFirst(newNode);	
 		else{
-			while(temp != null)
+			while(temp.getNext() != null)
 				temp = temp.getNext();
 			temp.setNext(newNode);
 		}
+		length = length+1;
 	}
 	
 	public boolean isEmpty(){
@@ -87,13 +93,18 @@ public class LinkedList<T> {
 		}
 	}
 	
-	public void insertAtPosition(int pos, T data){
+	public void insertAfterPosition(int pos, T data){
 		Node <T> temp = head;
 		Node <T> newNode = new Node <T> (data);
-		for(int i = 0; i < pos; i++)
-			temp = temp.getNext();
-		newNode.setNext(temp.getNext());
-		temp.setNext(newNode);
+		if(pos <= length){
+			for(int i = 1; i < pos; i++)
+				temp = temp.getNext();
+			newNode.setNext(temp.getNext());
+			temp.setNext(newNode);
+			length++;
+		}
+		else
+			System.out.println("Position is larger than the length");
 	}
 	
 	public void deleteKey(T key){
@@ -113,6 +124,7 @@ public class LinkedList<T> {
 		}
 		
 		if(eleFound){
+			length--;
 			prev.setNext(temp.getNext());
 		}
 		else{
@@ -137,7 +149,7 @@ public class LinkedList<T> {
 		if(length>1){
 			Node <T> temp = head;
 			Node <T> prev = head;
-			while(temp!=null){
+			while(temp.getNext()!=null){
 				prev = temp;
 				temp = temp.getNext();
 			}
@@ -145,26 +157,26 @@ public class LinkedList<T> {
 			tail = prev;
 			length--;
 		}
+		else if(length == 1){
+			head = null;
+			tail = null;
+			length--;
+		}
 		else
 			System.out.println("Length of List is ZERO hence we cannot delete");
 	}
-	
-	public int findLength(){
-		int length = 0;
-		Node <T> temp = head;
-		while(temp != null){
-			length++;
-			temp = temp.getNext();
-		}
-		return length;
-	}
-	
+		
 	public void printList(){
 		Node <T> temp = head;
-		while(temp != null){
-			System.out.println("The elements in the list are:");
-			System.out.println(temp.getData()+" ");
-		}
+		System.out.println("The elements in the list are:");
+		System.out.println("");
+		if(length >= 1)
+			while(temp != null){
+				System.out.print(temp.getData()+"->");
+				temp = temp.getNext();
+			}
+		else 
+			System.out.println("The list is empty");
 	}
 	    
 	public void clearList(){
@@ -176,7 +188,7 @@ public class LinkedList<T> {
 	public void findMidElement(){
 		Node <T> fastPtr = head;
 		Node <T> slowPtr = head;
-		while(fastPtr != null){
+		while(fastPtr.getNext() != null && fastPtr.getNext().getNext() != null){
 			slowPtr = slowPtr.getNext();
 			fastPtr = fastPtr.getNext().getNext();
 		}
