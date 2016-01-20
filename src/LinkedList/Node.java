@@ -5,29 +5,31 @@ public class Node <T> {
 	Node nextNode;
 	
 	
-	Node(T val){
+	public Node(T val){
 		this.data = val;
 		this.nextNode = null;
 	}
 	
-	Node(T val, Node nxtNode){
+	/*
+	 * Node(T val, Node nxtNode){
 		this.data = val;
 		setNext(nxtNode);
 	}
+	*/
 	
-	T getData(){
+	public T getData(){
 		return this.data;
 	}
 	
-	void setData(T val){
+	public void setData(T val){
 		this.data = val;
 	}
 	
-	Node getNext(){
+	public Node getNext(){
 		return this.nextNode;
 	}
 	
-	void setNext(Node nxtNode){
+	public void setNext(Node nxtNode){
 		this.nextNode = nxtNode;
 	}
 }
