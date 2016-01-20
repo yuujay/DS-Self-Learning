@@ -166,7 +166,7 @@ public class LinkedList<T> {
 			System.out.println(temp.getData()+" ");
 		}
 	}
-	
+	    
 	public void clearList(){
 		head = null;
 		tail = null;
