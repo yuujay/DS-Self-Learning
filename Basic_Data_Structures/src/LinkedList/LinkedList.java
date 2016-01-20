@@ -4,16 +4,16 @@ package LinkedList;
  *
  * */
 
-public class LinkedList {
-	Node head;
-	Node tail;
+public class LinkedList<T> {
+	Node <T> head;
+	Node <T> tail;
 	int length;
 
-	public Node getHead(){
+	public Node <T> getHead(){
 		return head;
 	}
 	
-	public Node getTail(){
+	public Node <T> getTail(){
 		return tail;
 	}
 	
@@ -21,14 +21,14 @@ public class LinkedList {
 		return length;
 	}
 	
-	public void addAtFirst(Node newNode){
+	public void addAtFirst(Node <T> newNode){
 		newNode.setNext(head);
 		head = newNode;
 		length = length+1;
 	}
 	
-	public void addAtEnd(Node newNode){
-		Node temp = head;
+	public void addAtEnd(Node <T> newNode){
+		Node <T> temp = head;
 		if(head == null)
 			addAtFirst(newNode);	
 		else{
@@ -45,8 +45,8 @@ public class LinkedList {
 			return false;
 	}
 	
-	public void insertAfterKey(int key,Node newNode){
-		Node temp = head;
+	public void insertAfterKey(T key,Node <T> newNode){
+		Node <T> temp = head;
 		boolean elemFndFlg = false;
 		
 		while(temp!= null){
@@ -66,9 +66,9 @@ public class LinkedList {
 		}
 	}
 	
-	public void insertBeforeKey(int key, Node newNode){
-		Node temp = head;
-		Node prev = head;
+	public void insertBeforeKey(T key, Node <T> newNode){
+		Node <T> temp = head;
+		Node <T> prev = head;
 		boolean elemFndFlg = false;
 		
 		while(temp!= null){
@@ -87,18 +87,18 @@ public class LinkedList {
 		}
 	}
 	
-	public void insertAtPosition(int pos, int data){
-		Node temp = head;
-		Node newNode = new Node(data);
+	public void insertAtPosition(int pos, T data){
+		Node <T> temp = head;
+		Node <T> newNode = new Node <T> (data);
 		for(int i = 0; i < pos; i++)
 			temp = temp.getNext();
 		newNode.setNext(temp.getNext());
 		temp.setNext(newNode);
 	}
 	
-	public void deleteKey(int key){
-		Node temp = head;
-		Node prev = head;
+	public void deleteKey(T key){
+		Node <T> temp = head;
+		Node <T> prev = head;
 		boolean eleFound = false;
 		
 		while(temp != null){
@@ -135,8 +135,8 @@ public class LinkedList {
 	
 	public void deleteTail(){
 		if(length>1){
-			Node temp = head;
-			Node prev = head;
+			Node <T> temp = head;
+			Node <T> prev = head;
 			while(temp!=null){
 				prev = temp;
 				temp = temp.getNext();
@@ -151,7 +151,7 @@ public class LinkedList {
 	
 	public int findLength(){
 		int length = 0;
-		Node temp = head;
+		Node <T> temp = head;
 		while(temp != null){
 			length++;
 			temp = temp.getNext();
@@ -160,7 +160,7 @@ public class LinkedList {
 	}
 	
 	public void printList(){
-		Node temp = head;
+		Node <T> temp = head;
 		while(temp != null){
 			System.out.println("The elements in the list are:");
 			System.out.println(temp.getData()+" ");
@@ -174,8 +174,8 @@ public class LinkedList {
 	}
 	
 	public void findMidElement(){
-		Node fastPtr = head;
-		Node slowPtr = head;
+		Node <T> fastPtr = head;
+		Node <T> slowPtr = head;
 		while(fastPtr != null){
 			slowPtr = slowPtr.getNext();
 			fastPtr = fastPtr.getNext().getNext();

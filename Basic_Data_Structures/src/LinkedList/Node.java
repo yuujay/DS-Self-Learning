@@ -1,25 +1,25 @@
 package LinkedList;
 
-public class Node {
-	int data;
+public class Node <T> {
+	T data;
 	Node nextNode;
 	
 	
-	Node(int val){
+	Node(T val){
 		this.data = val;
 		this.nextNode = null;
 	}
 	
-	Node(int val, Node nxtNode){
+	Node(T val, Node nxtNode){
 		this.data = val;
 		setNext(nxtNode);
 	}
 	
-	int getData(){
+	T getData(){
 		return this.data;
 	}
 	
-	void setData(int val){
+	void setData(T val){
 		this.data = val;
 	}
 	
