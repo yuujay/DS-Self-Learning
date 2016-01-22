@@ -49,6 +49,7 @@ public class BinarySearchTree <T> implements IBTreeInterface{
 	
 	public Node insertNodeToTree(Node treeNode, Object value){
 		//if(value <= treeNode.getData()){
+		//Need to find out how to use compartor comparable interfaces
 		return getRoot();	
 	}
 	
