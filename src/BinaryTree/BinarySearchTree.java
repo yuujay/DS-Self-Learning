@@ -119,9 +119,13 @@ public class BinarySearchTree <T extends Comparable<? super T> > implements IBTr
 	}
 
 	@Override
-	public T minValue(BinarySearchTree b) {
+	public T minValue(Node curNode) {
 		// TODO Auto-generated method stub
-		return null;
+		if(curNode.getLeft() == null){
+			return (T) curNode.getData();
+		}	
+		return minValue(curNode.getLeft());
+		
 	}
 
 	@Override

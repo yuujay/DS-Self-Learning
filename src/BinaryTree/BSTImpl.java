@@ -9,7 +9,8 @@ public class BSTImpl {
 		bst.insert(bst, 20);
 		bst.insert(bst, 30);
 		bst.insert(bst, 40);
+		bst.insert(bst, 7);
 		
-		System.out.println(bst.isBST(bst));
+		System.out.println(bst.minValue(bst.getRoot()));
 	}
 }

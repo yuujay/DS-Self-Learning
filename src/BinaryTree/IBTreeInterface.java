@@ -6,7 +6,7 @@ public interface IBTreeInterface<T> {
 	Node<T> delete(Node b, T value);
 	int size(Node b);
 	int maxDepth(BinarySearchTree b);
-	T minValue(BinarySearchTree b);
+	T minValue(Node b);
 	void printPostOrder(Node curNode);
 	void printPreOrder(Node curNode);
 	void printInOrder(Node curNode);
