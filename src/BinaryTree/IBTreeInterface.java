@@ -1,9 +1,9 @@
 package BinaryTree;
 
 public interface IBTreeInterface<T> {
-	boolean lookUp(BinarySearchTree b, T value);
-	Node insert(BinarySearchTree b, T value);
-	Node delete(BinarySearchTree b, T value);
+	Node<T> lookUp(Node b, T value);
+	Node<T> insert(BinarySearchTree b, T value);
+	Node<T> delete(BinarySearchTree b, T value);
 	int size(BinarySearchTree b);
 	int maxDepth(BinarySearchTree b);
 	T minValue(BinarySearchTree b);

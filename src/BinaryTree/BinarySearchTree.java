@@ -5,7 +5,12 @@ package BinaryTree;
  *
  * @param <T>
  */
-public class BinarySearchTree <T> implements IBTreeInterface{
+
+import java.util.*;
+import java.lang.*;
+
+
+public class BinarySearchTree <T extends Comparable<? super T> > implements IBTreeInterface<T>{
 	private Node <T> root;
 	private int height;
 	
@@ -35,32 +40,63 @@ public class BinarySearchTree <T> implements IBTreeInterface{
 	}
 	
 	@Override
-	public Node insert(BinarySearchTree b, Object value) {
-		// TODO Auto-generated method stub
+	public Node<T> insert(BinarySearchTree b, T value) {
 		if(isTreeEmpty()){
-			setRoot(new Node(value));
+			setRoot(new Node<T>(value));
 			return getRoot();
 		}
 		else{
-			insertNodeToTree(getRoot(),value);
+			return insertNodeToTree(getRoot(),value);
 		}
-		return null;
 	}
 	
-	public Node insertNodeToTree(Node treeNode, Object value){
-		//if(value <= treeNode.getData()){
-		//Need to find out how to use compartor comparable interfaces
-		return getRoot();	
+	public Node<T> insertNodeToTree(Node<T> treeNode, T value){
+		T data = treeNode.getData();
+		if( value.compareTo(data) >= 0){
+			if(treeNode.getRight()==null){
+				Node<T> newNode = new Node<T>(value);
+				newNode.setRight(newNode);
+				return newNode.getRight();
+			}
+			else{
+				return insertNodeToTree(treeNode.getRight(),value);
+			}
+		}
+		else{
+			if(treeNode.getLeft()==null){
+				Node<T> newNode = new Node<T>(value);
+				newNode.setLeft(newNode);
+				return newNode.getLeft();
+			}
+			else{
+				return insertNodeToTree(treeNode.getLeft(),value);
+			}
+		}
+	}
+	
+	public Node<T> lookUpUtil(Node curNode, T value){
+		if(curNode == null){
+			return null;
+		}
+		else if(curNode.getData() == value){
+			return curNode;
+		}
+		//Need to check which casting is done here!!!
+		else if(((Comparable<? super T>) curNode.getData()).compareTo(value) >= 0){
+			return lookUpUtil(curNode.getLeft(), value);
+		}
+		else
+			return lookUpUtil(curNode.getRight(), value);
 	}
 	
 	@Override
-	public boolean lookUp(BinarySearchTree b, Object value) {
-		// TODO Auto-generated method stub
-		return false;
+	public Node<T> lookUp(Node b, T value){
+		Node<T> curNode = root;
+		return lookUpUtil(curNode,value);
 	}
 
 	@Override
-	public Node delete(BinarySearchTree b, Object value) {
+	public Node<T> delete(BinarySearchTree b, T value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -78,7 +114,7 @@ public class BinarySearchTree <T> implements IBTreeInterface{
 	}
 
 	@Override
-	public Object minValue(BinarySearchTree b) {
+	public T minValue(BinarySearchTree b) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -106,5 +142,4 @@ public class BinarySearchTree <T> implements IBTreeInterface{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
 }
