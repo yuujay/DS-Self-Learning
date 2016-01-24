@@ -36,40 +36,42 @@ public class BinarySearchTree <T extends Comparable<? super T> > implements IBTr
 	}
 
 	boolean isTreeEmpty(){
-		return(size(this) == 0);
+		return(size(this.getRoot()) == 0);
 	}
 	
 	@Override
-	public Node<T> insert(BinarySearchTree b, T value) {
+	public void insert(BinarySearchTree b, T value) {
 		if(isTreeEmpty()){
 			setRoot(new Node<T>(value));
-			return getRoot();
+			return;
 		}
 		else{
-			return insertNodeToTree(getRoot(),value);
+			Node<T> temp = getRoot();
+			insertNodeToTree(temp,value);
 		}
 	}
 	
-	public Node<T> insertNodeToTree(Node<T> treeNode, T value){
+	public void insertNodeToTree(Node<T> treeNode, T value){
 		T data = treeNode.getData();
+		
 		if( value.compareTo(data) >= 0){
-			if(treeNode.getRight()==null){
+			if(treeNode.getRight() == null){
 				Node<T> newNode = new Node<T>(value);
-				newNode.setRight(newNode);
-				return newNode.getRight();
+				treeNode.setRight(newNode);
+				return;
 			}
 			else{
-				return insertNodeToTree(treeNode.getRight(),value);
+				insertNodeToTree(treeNode.getRight(),value);
 			}
 		}
 		else{
-			if(treeNode.getLeft()==null){
+			if(treeNode.getLeft() == null){
 				Node<T> newNode = new Node<T>(value);
-				newNode.setLeft(newNode);
-				return newNode.getLeft();
+				treeNode.setLeft(newNode);
+				return;
 			}
 			else{
-				return insertNodeToTree(treeNode.getLeft(),value);
+				insertNodeToTree(treeNode.getLeft(),value);
 			}
 		}
 	}
@@ -96,15 +98,18 @@ public class BinarySearchTree <T extends Comparable<? super T> > implements IBTr
 	}
 
 	@Override
-	public Node<T> delete(BinarySearchTree b, T value) {
+	public Node<T> delete(Node b, T value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int size(BinarySearchTree b) {
+	public int size(Node curNode) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		if(curNode == null)
+			return 0;
+		return (size(curNode.getRight())+ size(curNode.getLeft()) + 1);
 	}
 
 	@Override
@@ -117,12 +122,6 @@ public class BinarySearchTree <T extends Comparable<? super T> > implements IBTr
 	public T minValue(BinarySearchTree b) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void printPostOrder(BinarySearchTree b) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -140,6 +139,45 @@ public class BinarySearchTree <T extends Comparable<? super T> > implements IBTr
 	@Override
 	public boolean isBST(BinarySearchTree b) {
 		// TODO Auto-generated method stub
-		return false;
+		return isBSTUtil(b.getRoot());
+	}
+
+	public boolean isBSTUtil(Node curNode){		
+		if(curNode == null || curNode.getLeft()== null || curNode.getRight() == null)
+			return true;
+		if((((Comparable<? super T>) curNode.getLeft().getData()).compareTo((T) curNode.getData()) >= 0) || 
+				(((Comparable<? super T>) curNode.getRight().getData()).compareTo((T) curNode.getData()) <= 0)){
+			return false;
+		}
+		else return true;
+	}
+	@Override
+	public void printPostOrder(Node curNode) {
+		// TODO Auto-generated method stub
+		if(curNode == null)
+			return;
+		printInOrder(curNode.getLeft());
+		printInOrder(curNode.getRight());
+		System.out.println(curNode.getData());
+	}
+
+	@Override
+	public void printPreOrder(Node curNode) {
+		// TODO Auto-generated method stub
+		if(curNode == null)
+			return;
+		System.out.println(curNode.getData());
+		printInOrder(curNode.getLeft());
+		printInOrder(curNode.getRight());
+	}
+
+	@Override
+	public void printInOrder(Node curNode) {
+		// TODO Auto-generated method stub
+		if(curNode == null)
+			return;
+		printInOrder(curNode.getLeft());
+		System.out.println(curNode.getData());
+		printInOrder(curNode.getRight());	
 	}
 }
