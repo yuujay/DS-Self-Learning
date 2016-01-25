@@ -76,7 +76,7 @@ public class BinarySearchTree <T extends Comparable<? super T> > implements IBTr
 		}
 	}
 	
-	public Node<T> lookUpUtil(Node curNode, T value){
+	public Node<T> lookUpUtil(Node<T> curNode, T value){
 		if(curNode == null){
 			return null;
 		}
@@ -84,7 +84,7 @@ public class BinarySearchTree <T extends Comparable<? super T> > implements IBTr
 			return curNode;
 		}
 		//Need to check which casting is done here!!!
-		else if(((Comparable<? super T>) curNode.getData()).compareTo(value) >= 0){
+		else if((curNode.getData()).compareTo(value) >= 0){
 			return lookUpUtil(curNode.getLeft(), value);
 		}
 		else
@@ -92,21 +92,21 @@ public class BinarySearchTree <T extends Comparable<? super T> > implements IBTr
 	}
 	
 	@Override
-	public Node<T> lookUp(Node b, T value){
+	public Node<T> lookUp(BinarySearchTree b, T value){
 		Node<T> curNode = root;
 		return lookUpUtil(curNode,value);
 	}
 
 	@Override
-	public Node<T> delete(Node b, T value) {
-		// TODO Auto-generated method stub
+	public Node<T> delete(Node curNode, T value) {
+		if(curNode == null){
+			return null;
+		}
 		return null;
 	}
 
 	@Override
-	public int size(Node curNode) {
-		// TODO Auto-generated method stub
-		
+	public int size(Node<T> curNode) {
 		if(curNode == null)
 			return 0;
 		return (size(curNode.getRight())+ size(curNode.getLeft()) + 1);
@@ -114,15 +114,17 @@ public class BinarySearchTree <T extends Comparable<? super T> > implements IBTr
 
 	@Override
 	public int maxDepth(BinarySearchTree b) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public T minValue(Node curNode) {
-		// TODO Auto-generated method stub
-		if(curNode.getLeft() == null){
-			return (T) curNode.getData();
+	public Node<T> minValue(Node<T> curNode) {
+		if(curNode == null){
+			System.out.println("Treee Is Not constructed");
+			return null;
+		}
+		else if(curNode.getLeft() == null){
+			return curNode;
 		}	
 		return minValue(curNode.getLeft());
 		
@@ -135,7 +137,7 @@ public class BinarySearchTree <T extends Comparable<? super T> > implements IBTr
 	}
 
 	@Override
-	public Node mirror(BinarySearchTree b) {
+	public Node<T> mirror(BinarySearchTree b) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -146,18 +148,17 @@ public class BinarySearchTree <T extends Comparable<? super T> > implements IBTr
 		return isBSTUtil(b.getRoot());
 	}
 
-	public boolean isBSTUtil(Node curNode){		
+	public boolean isBSTUtil(Node<T> curNode){		
 		if(curNode == null || curNode.getLeft()== null || curNode.getRight() == null)
 			return true;
-		if((((Comparable<? super T>) curNode.getLeft().getData()).compareTo((T) curNode.getData()) >= 0) || 
-				(((Comparable<? super T>) curNode.getRight().getData()).compareTo((T) curNode.getData()) <= 0)){
+		if(((curNode.getLeft().getData()).compareTo(curNode.getData()) >= 0) || 
+				((curNode.getRight().getData()).compareTo(curNode.getData()) <= 0)){
 			return false;
 		}
 		else return true;
 	}
 	@Override
-	public void printPostOrder(Node curNode) {
-		// TODO Auto-generated method stub
+	public void printPostOrder(Node<T> curNode) {
 		if(curNode == null)
 			return;
 		printInOrder(curNode.getLeft());
@@ -166,8 +167,7 @@ public class BinarySearchTree <T extends Comparable<? super T> > implements IBTr
 	}
 
 	@Override
-	public void printPreOrder(Node curNode) {
-		// TODO Auto-generated method stub
+	public void printPreOrder(Node<T> curNode) {
 		if(curNode == null)
 			return;
 		System.out.println(curNode.getData());
@@ -176,8 +176,7 @@ public class BinarySearchTree <T extends Comparable<? super T> > implements IBTr
 	}
 
 	@Override
-	public void printInOrder(Node curNode) {
-		// TODO Auto-generated method stub
+	public void printInOrder(Node<T> curNode) {
 		if(curNode == null)
 			return;
 		printInOrder(curNode.getLeft());

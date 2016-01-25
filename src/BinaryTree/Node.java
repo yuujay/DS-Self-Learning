@@ -2,8 +2,8 @@ package BinaryTree;
 
 public class Node <T>{
 	private T data;
-	private Node left;
-	private Node right;
+	private Node<T> left;
+	private Node<T> right;
 
 	Node(T data){
 		this.data = data;
@@ -11,7 +11,7 @@ public class Node <T>{
 		right = null;
 	}
 	
-	Node(T data, Node leftNode, Node rightNode){
+	Node(T data, Node<T> leftNode, Node<T> rightNode){
 		this.data = data;
 		this.left = leftNode;
 		this.right = rightNode;
@@ -25,19 +25,19 @@ public class Node <T>{
 		this.data = data;
 	}
 
-	public Node getLeft() {
+	public Node<T> getLeft() {
 		return left;
 	}
 
-	public void setLeft(Node left) {
+	public void setLeft(Node<T> left) {
 		this.left = left;
 	}
 
-	public Node getRight() {
+	public Node<T> getRight() {
 		return right;
 	}
 
-	public void setRight(Node right) {
+	public void setRight(Node<T> right) {
 		this.right = right;
 	}
 }
